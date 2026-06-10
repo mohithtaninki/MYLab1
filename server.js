@@ -162,18 +162,13 @@ app.get('/api/admin/appointments', auth, async (req, res) => {
   res.json({ appointments });
 });
 
+// Initialize database when server starts
+connectDb()
+  .then(() => seedAdmin())
+  .catch(err => console.error('Database initialization failed:', err));
 
-async function start() {
-  await connectDb();
-  await seedAdmin();
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
-}
+export default app;
 
-start().catch(err => {
-  console.error('Failed to start server', err);
-  process.exit(1);
-});
+
 
 
