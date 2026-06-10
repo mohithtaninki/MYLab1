@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Print</title>
+  <style>
+    body{font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Arial; padding:24px}
+    h1{font-size:20px;margin:0 0 10px}
+    .muted{color:#555}
+    table{border-collapse:collapse; width:100%; margin-top:12px}
+    th,td{border:1px solid #ddd; padding:8px; text-align:left; font-size:13px}
+    th{background:#f5f5f5}
+    @media print{.no-print{display:none}}
+  </style>
+</head>
+<body>
+  <div class="no-print">
+    <button onclick="window.print()">Print</button>
+  </div>
+  <div id="root"></div>
+
+  <script>
+    // Expects ?data=<URI encoded JSON>
+    const params = new URLSearchParams(location.search);
+    const raw = params.get('data');
+    const root = document.getElementById('root');
+
+    function esc(s){return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'<','>':'>','"':'"',"'":'&#39;'}[c]));}
+
+    let payload = null;
+    try{
+      payload = raw ? JSON.parse(decodeURIComponent(raw)) : null;
+    }catch{ payload = null; }
+
+    if(!payload){
+      root.innerHTML = `<h1>Nothing to print</h1><div class="muted">No data provided.</div>`;
+    }else{
+      const r = payload;
+      const reports = (r.reports || []);
+      root.innerHTML = `
+        <h1>${esc(r.patientName)} - Lab Report</h1>
+        <div class="muted">Ref ID: ${esc(r.refId)}<br/>Created: ${esc(r.createdAt)}</div>
+        <table>
+          <thead><tr><th>Test</th><th>Value</th><th>Unit</th><th>Reference</th></tr></thead>
+          <tbody>
+            ${reports.map(rep => `
+              <tr>
+                <td>${esc(rep.testName)}</td>
+                <td>${esc(rep.value)}</td>
+                <td>${esc(rep.unit)}</td>
+                <td>${esc(rep.referenceRange)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sravani Anu Diagnostics - Blood Testing Lab</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo">🧪</div>
+        <div>
+          <div class="brand-title">Sravani Anu Diagnostics</div>
+          <div class="brand-sub">Blood Testing Lab</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#tests">Tests</a>
+        <a href="#results">Search Results</a>
+        <a href="#appointment">Appointment</a>
+      </nav>
+
+      <button class="mobile-menu" aria-label="Open menu" type="button" onclick="toggleMobileMenu()">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Accurate Blood Test Reports, On Time.</h1>
+          <p class="lead">
+            Trusted diagnostics for complete blood profiling and routine health markers.
+            Book an appointment or search your report using <b>Ref ID</b> or <b>Patient Name</b>.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#appointment">Book Appointment</a>
+            <a class="btn btn-ghost" href="#results">Check Results</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Highlights">
+          <div class="highlight"><b>Reports:</b> Faster turnaround</div>
+          <div class="highlight"><b>Search:</b> Ref ID / Name</div>
+          <div class="highlight"><b>Support:</b> Friendly guidance</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tests" class="section">
+      <div class="container">
+        <h2>Popular Blood Tests</h2>
+        <p class="muted">A quick overview. For details, book an appointment and our team will guide you.</p>
+
+        <div class="cards" id="testCards">
+          <!-- populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Search Test Results</h2>
+          <p class="muted">Enter <b>Ref ID</b> or <b>Patient Name</b> to find your report.</p>
+        </div>
+
+        <div class="panel">
+          <form id="searchForm" class="form-grid" autocomplete="off">
+            <label>
+              Ref ID
+              <input type="text" name="refId" placeholder="e.g., SR-10021" />
+            </label>
+            <label>
+              Patient Name
+              <input type="text" name="name" placeholder="e.g., Sravani" />
+            </label>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Search</button>
+              <button class="btn btn-ghost" type="button" onclick="clearResults()">Clear</button>
+            </div>
+          </form>
+
+          <div id="searchStatus" class="status" aria-live="polite"></div>
+          <div id="resultsList" class="results-list" aria-live="polite"></div>
+
+          <div class="note">
+            Demo data can be added via admin. Search API: <code>/api/results?refId=&name=</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="appointment" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Book an Appointment</h2>
+          <p class="muted">Share your details. We’ll confirm your appointment request.</p>
+        </div>
+
+        <div class="panel">
+          <form id="appointmentForm" class="form-grid">
+            <label>
+              Patient Name
+              <input type="text" name="patientName" required placeholder="Enter full name" />
+            </label>
+            <label>
+              Phone Number
+              <input type="tel" name="phone" required placeholder="e.g., 9876543210" />
+            </label>
+            <label>
+              Email (optional)
+              <input type="email" name="email" placeholder="name@example.com" />
+            </label>
+            <label>
+              Preferred Date
+              <input type="date" name="preferredDate" />
+            </label>
+            <label>
+              Preferred Time
+              <input type="time" name="preferredTime" />
+            </label>
+            <label>
+              Test / Service
+              <select name="service">
+                <option>Blood Test</option>
+                <option>Complete Blood Count (CBC)</option>
+                <option>Lipid Profile</option>
+                <option>Thyroid Profile</option>
+                <option>Diabetes Screening</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Request Appointment</button>
+            </div>
+          </form>
+
+          <div id="appointmentStatus" class="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Diagnostic Test Price List</h2>
+          <p class="muted">Prices are for quick reference. Final charges may vary by package.</p>
+        </div>
+
+        <section class="price-list">
+          <table class="price-table" border="1" cellspacing="0" cellpadding="10">
+            <thead>
+              <tr>
+                <th>Test Name</th>
+                <th>Price (₹)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Complete Blood Picture (CBP)</td><td>300</td></tr>
+              <tr><td>ESR</td><td>100</td></tr>
+              <tr><td>Haemoglobin (HB%)</td><td>100</td></tr>
+              <tr><td>Blood Group &amp; RH Types</td><td>100</td></tr>
+              <tr><td>Bleeding &amp; Clotting Time</td><td>100</td></tr>
+              <tr><td>HBA1C</td><td>600</td></tr>
+              <tr><td>Blood Sugar</td><td>50</td></tr>
+              <tr><td>Urine Sugar</td><td>20</td></tr>
+              <tr><td>Serum Creatinine</td><td>150</td></tr>
+              <tr><td>Blood Urea</td><td>150</td></tr>
+              <tr><td>Uric Acid</td><td>250</td></tr>
+              <tr><td>Serum Cholesterol</td><td>200</td></tr>
+              <tr><td>Triglycerides</td><td>250</td></tr>
+              <tr><td>Serum Bilirubin</td><td>150</td></tr>
+              <tr><td>Serum Bilirubin (Total, Direct, Indirect)</td><td>450</td></tr>
+              <tr><td>Serum Calcium</td><td>200</td></tr>
+              <tr><td>Sodium</td><td>200</td></tr>
+              <tr><td>Potassium</td><td>200</td></tr>
+              <tr><td>Chloride</td><td>200</td></tr>
+              <tr><td>CRP Titer</td><td>250</td></tr>
+              <tr><td>ASO Titer</td><td>250</td></tr>
+              <tr><td>VDRL Titer</td><td>250</td></tr>
+              <tr><td>RA Factor Titer</td><td>250</td></tr>
+              <tr><td>CRP Quantitative</td><td>700</td></tr>
+              <tr><td>ASO Quantitative</td><td>700</td></tr>
+              <tr><td>RA Factor Quantitative</td><td>700</td></tr>
+              <tr><td>Lactate Dehydrogenase (LDH)</td><td>800</td></tr>
+              <tr><td>Serum Ferritin</td><td>800</td></tr>
+              <tr><td>D-Dimer</td><td>1500</td></tr>
+              <tr><td>Mantoux Test</td><td>200</td></tr>
+
+              <tr><td>Lipid Profile</td><td>550</td></tr>
+              <tr><td>Liver Function Test (LFT)</td><td>800</td></tr>
+              <tr><td>LFT (T.D, D.I, SGOT, SGPT, ALP)</td><td>600</td></tr>
+              <tr><td>Serum Electrolytes</td><td>700</td></tr>
+              <tr><td>Widal Test</td><td>150</td></tr>
+              <tr><td>Smear for MP</td><td>150</td></tr>
+              <tr><td>Malaria PV/PF (Rapid)</td><td>250</td></tr>
+              <tr><td>Dengue (Rapid)</td><td>900</td></tr>
+              <tr><td>HIV 1 &amp; 2 (Rapid)</td><td>300</td></tr>
+              <tr><td>HCV 1 &amp; 2 (Rapid)</td><td>350</td></tr>
+              <tr><td>HBsAg (Rapid)</td><td>200</td></tr>
+              <tr><td>TPHA (Rapid)</td><td>250</td></tr>
+              <tr><td>Typhoid IgG/IgM (Rapid)</td><td>300</td></tr>
+              <tr><td>Serum Amylase</td><td>600</td></tr>
+              <tr><td>Serum Lipase</td><td>600</td></tr>
+              <tr><td>PT, INR</td><td>300</td></tr>
+              <tr><td>APTT</td><td>400</td></tr>
+              <tr><td>Vitamin D Total</td><td>1000</td></tr>
+              <tr><td>Vitamin B12</td><td>800</td></tr>
+              <tr><td>Vitamin D3</td><td>2300</td></tr>
+              <tr><td>Thyroid Profile (T3, T4, TSH)</td><td>600</td></tr>
+              <tr><td>Free Thyroid (FT3, FT4, TSH)</td><td>900</td></tr>
+              <tr><td>TSH</td><td>300</td></tr>
+              <tr><td>Complete Urine Analysis</td><td>200</td></tr>
+              <tr><td>Urine Albumin / Sugar / Micro</td><td>100</td></tr>
+              <tr><td>Urine HCG (Pregnancy Test)</td><td>100</td></tr>
+              <tr><td>Stool Examination</td><td>300</td></tr>
+              <tr><td>Semen Analysis (Slide)</td><td>300</td></tr>
+              <tr><td>Semen Analysis (Analyser)</td><td>1000</td></tr>
+              <tr><td>ECG</td><td>250</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </section>
+
+    <section class="footer">
+      <div class="container footer-inner">
+        <div>
+          <b>Sravani Anu Diagnostics</b><br />
+          Blood Testing Lab<br />
+          Address: Tadepalligudem, West Godavari District, Andhra Pradesh, India<br />
+          Phone: 9912696145, 7032524145, 9989331719
+        </div>
+        <div class="muted">© <span id="year"></span> All rights reserved.</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "seed1",
+    "refId": "SR-10021",
+    "patientName": "Sravani",
+    "reports": [
+      {
+        "testName": "Hemoglobin",
+        "value": 12.6,
+        "unit": "g/dL",
+        "referenceRange": "12.0 - 16.0"
+      },
+      {
+        "testName": "WBC",
+        "value": 6800,
+        "unit": "/µL",
+        "referenceRange": "4000 - 11000"
+      },
+      {
+        "testName": "Platelets",
+        "value": 245000,
+        "unit": "/µL",
+        "referenceRange": "150000 - 450000"
+      }
+    ],
+    "createdAt": "2026-01-10T08:30:00.000Z"
+  }
+]
+
